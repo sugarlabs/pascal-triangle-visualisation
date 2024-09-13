@@ -51,6 +51,12 @@ def scale_image_contain(img, w, h):
 
     return new_img
 
-
-def array_has_no_none(arr):
-    return all(element is not None for element in arr)
+def pascal_triangle(rows, mod):
+    triangle = [[1]]
+    for i in range(1, rows):
+        row = [1]
+        for j in range(1, i):
+            row.append((triangle[i-1][j-1] + triangle[i-1][j]) % mod)
+        row.append(1)
+        triangle.append(row)
+    return triangle

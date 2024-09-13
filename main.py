@@ -46,6 +46,12 @@ class PascalTriangle:
         rect = surf.get_rect()
         centered_coords = (x - rect.width // 2, y - rect.height // 2)
         self.gameDisplay.blit(surf, centered_coords)
+    def blit_centered(self, surf, pos):
+        x = pos[0]
+        y = pos[1]
+        rect = surf.get_rect()
+        centered_coords = (x - rect.width // 2, y - rect.height // 2)
+        self.gameDisplay.blit(surf, centered_coords)
 
     def stop(self):
         self.running = False
