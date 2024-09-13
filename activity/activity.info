@@ -6,4 +6,4 @@ icon = icon
 exec = sugar-activity3 activity.PascalTriangleActivity
 license = GPLv3+
 summary = Visualization software for various pascal triangle properties
-repository = https://github.com/marsian83/pascal-triangle.git
+repository = https://github.com/marsian83/pascal-triangle-visualisation.git
