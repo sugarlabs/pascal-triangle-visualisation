@@ -1,0 +1,9 @@
+[Activity]
+name = Pascal Triangle
+activity_version = 1
+bundle_id = org.sugarlabs.pascaltriangle
+icon = icon
+exec = sugar-activity3 activity.PascalTriangleActivity
+license = GPLv3+
+summary = Visualization software for various pascal triangle properties
+repository = https://github.com/marsian83/pascal-triangle.git
