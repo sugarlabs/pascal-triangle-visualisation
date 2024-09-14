@@ -2,7 +2,7 @@
 name = Pascal Triangle
 activity_version = 1
 bundle_id = org.sugarlabs.pascaltriangle
-icon = icon
+icon = pascal
 exec = sugar-activity3 activity.PascalTriangleActivity
 license = GPLv3+
 summary = Visualization software for various pascal triangle properties

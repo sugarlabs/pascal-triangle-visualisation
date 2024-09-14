@@ -169,7 +169,7 @@ def view(game):
                 if modulo_decrement_rect.collidepoint(mouse_pos):
                     mod = max(1, rows - 1)
                     triangle = pascal_triangle(rows, mod)
-                if modulo_decrement_rect.collidepoint(mouse_pos):
+                if modulo_increment_rect.collidepoint(mouse_pos):
                     mod += 1
                     triangle = pascal_triangle(rows, mod)
                 if color_change_rect.collidepoint(mouse_pos):

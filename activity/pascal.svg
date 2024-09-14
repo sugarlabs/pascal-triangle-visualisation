@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+  <!ENTITY fill_color "#FFFFFF">
+  <!ENTITY stroke_color "#000000">
+]>
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="500" height="500">
+<path d="M0 0 C78.21 0 156.42 0 237 0 C237 42.57 237 85.14 237 129 C158.79 129 80.58 129 0 129 C0 86.43 0 43.86 0 0 Z " fill="&fill_color;" transform="translate(252,240)"/>
+<path d="M0 0 C78.21 0 156.42 0 237 0 C237 42.57 237 85.14 237 129 C158.79 129 80.58 129 0 129 C0 86.43 0 43.86 0 0 Z " fill="&fill_color;" transform="translate(12,240)"/>
+<path d="M0 0 C78.21 0 156.42 0 237 0 C237 42.57 237 85.14 237 129 C158.79 129 80.58 129 0 129 C0 86.43 0 43.86 0 0 Z " fill="&fill_color;" transform="translate(132,108)"/>
+<path d="M0 0 C78.21 0 156.42 0 237 0 C237 42.57 237 85.14 237 129 C158.79 129 80.58 129 0 129 C0 86.43 0 43.86 0 0 Z M8 8 C8 45.29 8 82.58 8 121 C80.93 121 153.86 121 229 121 C229 83.71 229 46.42 229 8 C156.07 8 83.14 8 8 8 Z " fill="&stroke_color;" transform="translate(252,240)"/>
+<path d="M0 0 C78.21 0 156.42 0 237 0 C237 42.57 237 85.14 237 129 C158.79 129 80.58 129 0 129 C0 86.43 0 43.86 0 0 Z M8 8 C8 45.29 8 82.58 8 121 C80.93 121 153.86 121 229 121 C229 83.71 229 46.42 229 8 C156.07 8 83.14 8 8 8 Z " fill="&stroke_color;" transform="translate(12,240)"/>
+<path d="M0 0 C78.21 0 156.42 0 237 0 C237 42.57 237 85.14 237 129 C158.79 129 80.58 129 0 129 C0 86.43 0 43.86 0 0 Z M8 8 C8 45.29 8 82.58 8 121 C80.93 121 153.86 121 229 121 C229 83.71 229 46.42 229 8 C156.07 8 83.14 8 8 8 Z " fill="&stroke_color;" transform="translate(132,108)"/>
+</svg>
