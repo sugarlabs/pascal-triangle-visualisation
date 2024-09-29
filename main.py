@@ -33,6 +33,8 @@ class PascalTriangle:
 
         self.events = []
 
+        self.help = pygame.image.load('./help.png')
+
     def vw(self, x):
         return int((x / 100) * self.display_rect.width)
 
@@ -55,6 +57,15 @@ class PascalTriangle:
 
     def stop(self):
         self.running = False
+
+    def show_help(self):
+        p_upd = self.update_function
+        def t_update():
+            self.gameDisplay.blit(self.help, (0, 0))
+            for event in self.events:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    self.update_function = p_upd
+        self.update_function = t_update
 
     def run(self):
         self.gameDisplay = pygame.display.get_surface()
