@@ -21,6 +21,7 @@ import pygame
 
 from sugar3.activity.activity import Activity
 from sugar3.graphics.toolbarbox import ToolbarBox
+from sugar3.graphics.toolbutton import ToolButton
 from sugar3.activity.widgets import ActivityToolbarButton
 from sugar3.activity.widgets import StopButton
 
@@ -59,6 +60,12 @@ class PascalTriangleActivity(Activity):
         toolbar_box.toolbar.insert(separator, -1)
         separator.show()
 
+        help_button = ToolButton('toolbar-help')
+        help_button.set_tooltip(_('How To Play'))
+        help_button.connect('clicked', self.show_help)
+        toolbar_box.toolbar.insert(help_button, -1)
+        help_button.show()
+
         separator = Gtk.SeparatorToolItem()
         separator.props.draw = False
         separator.set_expand(True)
@@ -69,6 +76,9 @@ class PascalTriangleActivity(Activity):
         toolbar_box.toolbar.insert(stop_button, -1)
         stop_button.show()
         stop_button.connect('clicked', self._stop_cb)
+
+    def show_help(self, button):
+        self.game.show_help()
 
     def _stop_cb(self, button):
         self.game.stop()
