@@ -1,25 +1,3 @@
-#
-# Copyright (c) 2020 Wade Brainerd
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-#
-
 import logging
 from gi.repository import GLib
 from gi.repository import Gdk
@@ -64,143 +42,6 @@ class Translator(object):
         pygame.K_RSHIFT: pygame.KMOD_RSHIFT,
     }
 
-    keys = [
-        pygame.K_UNKNOWN,
-        pygame.K_BACKSPACE,
-        pygame.K_TAB,
-        pygame.K_RETURN,
-        pygame.K_ESCAPE,
-        pygame.K_SPACE,
-        pygame.K_EXCLAIM,
-        pygame.K_QUOTEDBL,
-        pygame.K_HASH,
-        pygame.K_DOLLAR,
-        pygame.K_PERCENT,
-        pygame.K_AMPERSAND,
-        pygame.K_QUOTE,
-        pygame.K_LEFTPAREN,
-        pygame.K_RIGHTPAREN,
-        pygame.K_ASTERISK,
-        pygame.K_PLUS,
-        pygame.K_COMMA,
-        pygame.K_MINUS,
-        pygame.K_PERIOD,
-        pygame.K_SLASH,
-        pygame.K_0,
-        pygame.K_1,
-        pygame.K_2,
-        pygame.K_3,
-        pygame.K_4,
-        pygame.K_5,
-        pygame.K_6,
-        pygame.K_7,
-        pygame.K_8,
-        pygame.K_9,
-        pygame.K_COLON,
-        pygame.K_SEMICOLON,
-        pygame.K_LESS,
-        pygame.K_EQUALS,
-        pygame.K_GREATER,
-        pygame.K_QUESTION,
-        pygame.K_AT,
-        pygame.K_LEFTBRACKET,
-        pygame.K_BACKSLASH,
-        pygame.K_RIGHTBRACKET,
-        pygame.K_CARET,
-        pygame.K_UNDERSCORE,
-        pygame.K_BACKQUOTE,
-        pygame.K_a,
-        pygame.K_b,
-        pygame.K_c,
-        pygame.K_d,
-        pygame.K_e,
-        pygame.K_f,
-        pygame.K_g,
-        pygame.K_h,
-        pygame.K_i,
-        pygame.K_j,
-        pygame.K_k,
-        pygame.K_l,
-        pygame.K_m,
-        pygame.K_n,
-        pygame.K_o,
-        pygame.K_p,
-        pygame.K_q,
-        pygame.K_r,
-        pygame.K_s,
-        pygame.K_t,
-        pygame.K_u,
-        pygame.K_v,
-        pygame.K_w,
-        pygame.K_x,
-        pygame.K_y,
-        pygame.K_z,
-        pygame.K_DELETE,
-        pygame.K_CAPSLOCK,
-        pygame.K_F1,
-        pygame.K_F2,
-        pygame.K_F3,
-        pygame.K_F4,
-        pygame.K_F5,
-        pygame.K_F6,
-        pygame.K_F7,
-        pygame.K_F8,
-        pygame.K_F9,
-        pygame.K_F10,
-        pygame.K_F11,
-        pygame.K_F12,
-        pygame.K_PRINT,
-        pygame.K_SCROLLOCK,
-        pygame.K_BREAK,
-        pygame.K_INSERT,
-        pygame.K_HOME,
-        pygame.K_PAGEUP,
-        pygame.K_END,
-        pygame.K_PAGEDOWN,
-        pygame.K_RIGHT,
-        pygame.K_LEFT,
-        pygame.K_DOWN,
-        pygame.K_UP,
-        pygame.K_NUMLOCK,
-        pygame.K_KP_DIVIDE,
-        pygame.K_KP_MULTIPLY,
-        pygame.K_KP_MINUS,
-        pygame.K_KP_PLUS,
-        pygame.K_KP_ENTER,
-        pygame.K_KP1,
-        pygame.K_KP2,
-        pygame.K_KP3,
-        pygame.K_KP4,
-        pygame.K_KP5,
-        pygame.K_KP6,
-        pygame.K_KP7,
-        pygame.K_KP8,
-        pygame.K_KP9,
-        pygame.K_KP0,
-        pygame.K_KP_PERIOD,
-        pygame.K_POWER,
-        pygame.K_KP_EQUALS,
-        pygame.K_F13,
-        pygame.K_F14,
-        pygame.K_F15,
-        pygame.K_HELP,
-        pygame.K_MENU,
-        pygame.K_SYSREQ,
-        pygame.K_CLEAR,
-        pygame.K_CURRENCYUNIT,
-        pygame.K_CURRENCYSUBUNIT,
-        pygame.K_LCTRL,
-        pygame.K_LSHIFT,
-        pygame.K_LALT,
-        pygame.K_LMETA,
-        pygame.K_RCTRL,
-        pygame.K_RSHIFT,
-        pygame.K_RALT,
-        pygame.K_RMETA,
-        pygame.K_MODE,
-        pygame.K_AC_BACK
-    ]
-
     def __init__(self, activity, inner_evb):
         """Initialise the Translator with the windows to which to listen"""
         self._activity = activity
@@ -237,6 +78,7 @@ class Translator(object):
         self._inner_evb.connect('screen-changed', self._screen_changed_cb)
 
         # Internal data
+        self.__keystate = [0] * 323
         self.__button_state = [0, 0, 0]
         self.__mouse_pos = (0, 0)
         self.__repeat = (None, None)
@@ -244,7 +86,6 @@ class Translator(object):
         self.__held_time_left = {}
         self.__held_last_time = {}
         self.__tick_id = None
-        self.__keystate = dict((i, False) for i in self.keys)
 
     def hook_pygame(self):
         pygame.key.get_pressed = self._get_pressed
@@ -332,13 +173,13 @@ class Translator(object):
             ukey = chr(Gdk.keyval_to_unicode(event.keyval))
             if ukey == '\000':
                 ukey = ''
-            evt = pygame.event.Event(type, key=keycode, unicode=ukey, mod=mod)
+            evt = pygame.event.Event(type, key=keycode, str=ukey, mod=mod)
             self._post(evt)
 
         return True
 
     def _get_pressed(self):
-        return list(self.__keystate.values())
+        return self.__keystate
 
     def _get_mouse_pressed(self):
         return self.__button_state
@@ -353,7 +194,7 @@ class Translator(object):
 
     def _mouseevent(self, widget, event, type):
         evt = pygame.event.Event(type, button=event.button, pos=(event.x,
-                                                                 event.y))
+            event.y))
         self._post(evt)
         return True
 

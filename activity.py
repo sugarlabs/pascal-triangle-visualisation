@@ -61,7 +61,7 @@ class PascalTriangleActivity(Activity):
         separator.show()
 
         help_button = ToolButton('toolbar-help')
-        help_button.set_tooltip(_('How To Play'))
+        help_button.set_tooltip('How To Play')
         help_button.connect('clicked', self.show_help)
         toolbar_box.toolbar.insert(help_button, -1)
         help_button.show()
