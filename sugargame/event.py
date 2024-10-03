@@ -75,6 +75,7 @@ class Translator(object):
         pygame.K_QUOTEDBL,
         pygame.K_HASH,
         pygame.K_DOLLAR,
+        pygame.K_PERCENT,
         pygame.K_AMPERSAND,
         pygame.K_QUOTE,
         pygame.K_LEFTPAREN,
@@ -186,6 +187,8 @@ class Translator(object):
         pygame.K_MENU,
         pygame.K_SYSREQ,
         pygame.K_CLEAR,
+        pygame.K_CURRENCYUNIT,
+        pygame.K_CURRENCYSUBUNIT,
         pygame.K_LCTRL,
         pygame.K_LSHIFT,
         pygame.K_LALT,
@@ -195,6 +198,7 @@ class Translator(object):
         pygame.K_RALT,
         pygame.K_RMETA,
         pygame.K_MODE,
+        pygame.K_AC_BACK
     ]
 
     def __init__(self, activity, inner_evb):

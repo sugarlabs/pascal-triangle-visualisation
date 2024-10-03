@@ -13,10 +13,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 import pygame
 from utils import pascal_triangle
 import random
+
 
 def view(game):
     vw = game.vw
@@ -24,7 +24,8 @@ def view(game):
     font = game.font
 
     width = vw(100)
-    height = vh(100)
+    # height variable is assigned but never used
+    _ = vh(100)
 
     BLACK = (0, 0, 0)
     COLORS = [
@@ -75,10 +76,16 @@ def view(game):
 
             for j, value in enumerate(row):
                 color_mod = value % mod
-                color = (COLORS[color_index][0], COLORS[color_index][1], COLORS[color_index][2], int(20 + (color_mod / mod) * 200))
-                temp_surface = pygame.Surface((cell_width, cell_height), pygame.SRCALPHA)
+                color = (COLORS[color_index][0],
+                         COLORS[color_index][1],
+                         COLORS[color_index][2],
+                         int(20 + (color_mod / mod) * 200))
+                temp_surface = pygame.Surface((cell_width,
+                                               cell_height),
+                                              pygame.SRCALPHA)
                 temp_surface.fill(color)
-                rect = pygame.Rect(x_offset + j * cell_width - vw(15), y, cell_width, cell_height)
+                rect = pygame.Rect(x_offset + j * cell_width - vw(15), y,
+                                   cell_width, cell_height)
 
                 game.gameDisplay.blit(temp_surface, rect)
 
@@ -101,7 +108,11 @@ def view(game):
     display_numbers = True
     triangle = pascal_triangle(rows, mod)
 
-    instructions = font.lg.render("Use < Arrow Keys > + < Space Bar > to control parameters", True, BLACK)
+    instructions = font.lg.render(
+        "Use < Arrow Keys > + < Space Bar > to control parameters",
+        True,
+        BLACK
+    )
 
     # Controls
     row_decrement_rect = pygame.Rect((width - 140, vh(15)), (40, 40))
@@ -118,16 +129,20 @@ def view(game):
     def draw_controls():
         # Rows
         text = font.lg.render(f"Rows: {rows}", True, BLACK)
-        game.gameDisplay.blit(text, (row_decrement_rect.x, row_decrement_rect.y - 40))
+        game.gameDisplay.blit(text,
+                              (row_decrement_rect.x,
+                               row_decrement_rect.y - 40))
 
         pygame.draw.rect(game.gameDisplay, BUTTON_COLOR, row_decrement_rect)
         game.blit_centered(minus_sign, row_decrement_rect.center)
         pygame.draw.rect(game.gameDisplay, BUTTON_COLOR, row_increment_rect)
         game.blit_centered(plus_sign, row_increment_rect.center)
-        
+
         # Modulo
         text = font.lg.render(f"Modulo: {mod}", True, BLACK)
-        game.gameDisplay.blit(text, (modulo_decrement_rect.x, modulo_decrement_rect.y - 40))
+        game.gameDisplay.blit(text,
+                              (modulo_decrement_rect.x,
+                               modulo_decrement_rect.y - 40))
 
         pygame.draw.rect(game.gameDisplay, BUTTON_COLOR, modulo_decrement_rect)
         game.blit_centered(minus_sign, modulo_decrement_rect.center)
@@ -135,8 +150,9 @@ def view(game):
         game.blit_centered(plus_sign, modulo_increment_rect.center)
 
         # Color
-        pygame.draw.rect(game.gameDisplay, COLORS[color_index], color_change_rect)
-
+        pygame.draw.rect(game.gameDisplay,
+                         COLORS[color_index],
+                         color_change_rect)
 
     def update():
         nonlocal triangle, display_numbers, mod, rows, color_index
@@ -167,17 +183,16 @@ def view(game):
                     rows += 1
                     triangle = pascal_triangle(rows, mod)
                 if modulo_decrement_rect.collidepoint(mouse_pos):
-                    mod = max(1, rows - 1)
+                    mod = max(1, mod - 1)
                     triangle = pascal_triangle(rows, mod)
                 if modulo_increment_rect.collidepoint(mouse_pos):
                     mod += 1
                     triangle = pascal_triangle(rows, mod)
                 if color_change_rect.collidepoint(mouse_pos):
                     color_index = random.choice(list(range(len(COLORS))))
-                    
 
         draw_triangle(triangle, mod, display_numbers)
         draw_controls()
-        game.blit_centered(instructions, (width //2, vh(96)))
+        game.blit_centered(instructions, (width // 2, vh(96)))
 
     game.update_function = update

@@ -21,6 +21,7 @@ from gi.repository import Gtk
 from font import Font
 import triangle
 
+
 class PascalTriangle:
     def __init__(self):
         self.running = True
@@ -42,10 +43,6 @@ class PascalTriangle:
     def set_screen(self, view):
         view(self)
 
-    def blit_centered(self, surf, x, y):
-        rect = surf.get_rect()
-        centered_coords = (x - rect.width // 2, y - rect.height // 2)
-        self.gameDisplay.blit(surf, centered_coords)
     def blit_centered(self, surf, pos):
         x = pos[0]
         y = pos[1]

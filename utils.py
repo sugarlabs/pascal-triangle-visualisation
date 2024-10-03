@@ -13,7 +13,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 import pygame
 
 
@@ -31,19 +30,20 @@ def scale_image_maintain_ratio(img, w=None, h=None):
 
     if w is None and h is None:
         return img
-    
+
+
 def scale_image_contain(img, w, h):
     img_ratio = img.get_width() / img.get_height()
     target_ratio = w / h
 
     new_img = pygame.Surface((w, h), pygame.SRCALPHA)
 
-    if img_ratio > target_ratio : 
+    if img_ratio > target_ratio:
         new_w = w
         new_h = int(w / img_ratio)
         sc_img = pygame.transform.scale(img, (new_w, new_h))
         new_img.blit(sc_img, (0, (h - new_h) // 2))
-    else :
+    else:
         new_h = h
         new_w = int(h * img_ratio)
         sc_img = pygame.transform.scale(img, (new_w, new_h))
@@ -51,12 +51,13 @@ def scale_image_contain(img, w, h):
 
     return new_img
 
+
 def pascal_triangle(rows, mod):
     triangle = [[1]]
     for i in range(1, rows):
         row = [1]
         for j in range(1, i):
-            row.append((triangle[i-1][j-1] + triangle[i-1][j]) % mod)
+            row.append((triangle[i - 1][j - 1] + triangle[i - 1][j]) % mod)
         row.append(1)
         triangle.append(row)
     return triangle
